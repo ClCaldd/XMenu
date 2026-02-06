@@ -49,6 +49,10 @@ while(true)
         commit()
 
         crr_url = url
+        fs.copyFileSync(
+        './states/updated.png',
+        './status.png'
+      );
         await browser.close();
         resolve();
       });
