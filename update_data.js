@@ -49,6 +49,7 @@ while(true)
 
       crr_url = url
       await browser.close();
+      await new Promise(resolve => browser.on('disconnected', resolve));
     });
   });
   await page.goto('https://ctweb03.br.bosch.com/presenter/#!/presentation');
