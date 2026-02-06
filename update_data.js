@@ -8,9 +8,13 @@ let crr_url
 let crr_date = new Date().toISOString().slice(0, 10);
 
 const commit = () => {
-  execSync('git add .', { stdio: 'inherit' });
-  execSync(`git commit -m "update ${new Date().toISOString().slice(0,10)}"`, { stdio: 'inherit' });
-  execSync('git push', { stdio: 'inherit' });
+  try {
+    execSync('git add .', { stdio: 'inherit' });
+    execSync(`git commit -m "update ${new Date().toISOString().slice(0,10)}"`, { stdio: 'inherit' });
+    execSync('git push', { stdio: 'inherit' });
+  } catch (error) {
+    console.log("Sem alterações para commitar ou erro no Git. Pulando...");
+  }
 }
 
 while(true)
