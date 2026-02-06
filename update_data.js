@@ -46,13 +46,15 @@ while(true)
         const image = await fetch(url);
         const buf = Buffer.from(await image.arrayBuffer());
         fs.writeFileSync('imagem.jpg', buf);
-        commit()
-
+        
         crr_url = url
         fs.copyFileSync(
-        './states/updated.png',
-        './status.png'
-      );
+          './states/updated.png',
+          './status.png'
+        );
+        
+        commit()
+
         await browser.close();
         resolve();
       });
