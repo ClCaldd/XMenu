@@ -5,7 +5,6 @@ import { chromium } from 'playwright';
 import fs from 'fs';
 
 let crr_url
-let crr_date = new Date().toISOString().slice(0, 10);
 
 const commit = () => {
   try {
@@ -19,16 +18,7 @@ const commit = () => {
 
 while(true)
 {
-  const date = new Date().toISOString().slice(0, 10)
-  if(crr_date != date)
-  {
-    fs.copyFileSync(
-      './states/out_of_date.png',
-      './status.png'
-    );
-    crr_date = date
-    commit()
-  }
+
   const browser = await chromium.launch({ headless: true });
   const page = await browser.newPage();
 
@@ -52,11 +42,7 @@ while(true)
         fs.writeFileSync('imagem.jpg', buf);
         
         crr_url = url
-        fs.copyFileSync(
-          './states/updated.png',
-          './status.png'
-        );
-        
+
         commit()
 
         await browser.close();
