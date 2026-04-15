@@ -265,6 +265,34 @@ document.getElementById("password").addEventListener("keydown", e=>{
     localStorage.setItem(storageKey, isLight ? "light" : "dark");
   });
 })();
+
+(function(){
+
+const VERSION_URL = "./version.json";
+const INTERVAL = 5000;
+let currentVersion = null;
+
+async function checkVersion(){
+  try{
+    const res = await fetch(VERSION_URL + "?t=" + Date.now(), {
+      cache: "no-store"
+    });
+
+    const data = await res.json();
+
+    if(currentVersion && data.v !== currentVersion){
+      location.reload();
+    }
+
+    currentVersion = data.v;
+
+  }catch{}
+}
+
+setInterval(checkVersion, INTERVAL);
+checkVersion();
+
+})();
 </script>
 
 </body>
