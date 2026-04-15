@@ -280,11 +280,11 @@ async function checkVersion(){
 
     const data = await res.json();
 
-    if(currentVersion && data.v !== currentVersion){
+    if(currentVersion && data.ts !== currentVersion){
       location.reload();
     }
 
-    currentVersion = data.v;
+    currentVersion = data.ts;
 
   }catch{}
 }
